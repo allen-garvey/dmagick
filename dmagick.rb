@@ -11,12 +11,13 @@ SOURCE_DIRECTORY_NAME = ARGV[0]
 
 SOURCE_FILE_EXTENSION = '.tif'
 JPEG_QUALITY = '40%'
+OUTPUT_FILE_EXTENSION = 'jpg'
 
 
 ### move large portrait images to unused
 def move_large_portraits_to_unused()
 	Kernel.system "mkdir -p #{UNUSED_DIRECTORY_NAME}"
-	large_images = `find *-lg.jpg`
+	large_images = `find *-lg.#{OUTPUT_FILE_EXTENSION}`
 	large_images.split("\n").each do |image|
 		jpeg_info = `identify #{image}`
 		jpeg_info_array = jpeg_info.split(" ")
@@ -35,7 +36,7 @@ end
 def generate_image_sizes()
 	Kernel.system "mkdir -p #{DESTINATION_DIRECTORY_NAME}"
 	SIZES.each do |size|
-		imagemagick_command = "#{IMAGEMAGICK_COMMAND} '*#{SOURCE_FILE_EXTENSION}' -resize #{size[:max_width]} -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.jpg'"
+		imagemagick_command = "#{IMAGEMAGICK_COMMAND} '*#{SOURCE_FILE_EXTENSION}' -resize #{size[:max_width]} -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.#{OUTPUT_FILE_EXTENSION}'"
 		puts imagemagick_command
 		Kernel.system imagemagick_command
 	end
