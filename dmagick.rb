@@ -5,22 +5,12 @@ if ARGV.size != 1
 	abort("Requires source directory name as first argument")
 end
 
-#imagemagick 7 is magick
-#imagemagick 6 is convert
-IMAGEMAGICK_COMMAND = 'convert'
+require_relative './dmagick-constants.rb'
 
 SOURCE_DIRECTORY_NAME = ARGV[0]
-DESTINATION_DIRECTORY_NAME = 'finals'
-UNUSED_DIRECTORY_NAME = 'unused'
 
 SOURCE_FILE_EXTENSION = '.tif'
-
 JPEG_QUALITY = '40%'
-SIZES = [
-			{name: 'lg', max_width: 1600},
-			{name: 'med', max_width: 900},
-			{name: 'sm', max_width: 500},
-	]
 THUMBNAIL_SIZE = {name: 'thumb', max_width: 200}
 
 
