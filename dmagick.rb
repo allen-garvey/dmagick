@@ -5,6 +5,10 @@ if ARGV.size != 1
 	abort("Requires source directory name as first argument")
 end
 
+#imagemagick 7 is magick
+#imagemagick 6 is convert
+IMAGEMAGICK_COMMAND = 'convert'
+
 SOURCE_DIRECTORY_NAME = ARGV[0]
 DESTINATION_DIRECTORY_NAME = 'finals'
 UNUSED_DIRECTORY_NAME = 'unused'
@@ -42,7 +46,7 @@ end
 def generate_image_sizes()
 	Kernel.system "mkdir -p #{DESTINATION_DIRECTORY_NAME}"
 	SIZES.each do |size|
-		imagemagick_command = "magick '*#{SOURCE_FILE_EXTENSION}' -resize #{size[:max_width]} -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.jpg'"
+		imagemagick_command = "#{IMAGEMAGICK_COMMAND} '*#{SOURCE_FILE_EXTENSION}' -resize #{size[:max_width]} -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.jpg'"
 		puts imagemagick_command
 		Kernel.system imagemagick_command
 	end
@@ -50,7 +54,7 @@ end
 
 ### automatically generate thumbnails
 def generate_thumbnails()
-	imagemagick_thumbnail_command = "magick '*#{SOURCE_FILE_EXTENSION}' -resize #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}^ -gravity Center -crop #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}+0+0 +repage  -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{THUMBNAIL_SIZE[:name]}.jpg'"
+	imagemagick_thumbnail_command = "#{IMAGEMAGICK_COMMAND} '*#{SOURCE_FILE_EXTENSION}' -resize #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}^ -gravity Center -crop #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}+0+0 +repage  -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{THUMBNAIL_SIZE[:name]}.jpg'"
 	puts imagemagick_thumbnail_command
 	Kernel.system imagemagick_thumbnail_command
 end
