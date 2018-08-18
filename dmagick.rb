@@ -11,7 +11,6 @@ SOURCE_DIRECTORY_NAME = ARGV[0]
 
 SOURCE_FILE_EXTENSION = '.tif'
 JPEG_QUALITY = '40%'
-THUMBNAIL_SIZE = {name: 'thumb', max_width: 200}
 
 
 ### move large portrait images to unused
@@ -42,17 +41,9 @@ def generate_image_sizes()
 	end
 end
 
-### automatically generate thumbnails
-def generate_thumbnails()
-	imagemagick_thumbnail_command = "#{IMAGEMAGICK_COMMAND} '*#{SOURCE_FILE_EXTENSION}' -resize #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}^ -gravity Center -crop #{THUMBNAIL_SIZE[:max_width]}x#{THUMBNAIL_SIZE[:max_width]}+0+0 +repage  -quality #{JPEG_QUALITY} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{THUMBNAIL_SIZE[:name]}.jpg'"
-	puts imagemagick_thumbnail_command
-	Kernel.system imagemagick_thumbnail_command
-end
-
 
 Dir.chdir(SOURCE_DIRECTORY_NAME) do
 	generate_image_sizes()
-	# generate_thumbnails()
 
 	Dir.chdir(DESTINATION_DIRECTORY_NAME) do
 		move_large_portraits_to_unused()
