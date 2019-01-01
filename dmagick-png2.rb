@@ -17,7 +17,7 @@ OUTPUT_FILE_EXTENSION = 'jpg'
 ### move large portrait images to unused
 def move_large_portraits_to_unused()
 	Kernel.system "mkdir -p #{UNUSED_DIRECTORY_NAME}"
-	large_images = `find *-lg.#{OUTPUT_FILE_EXTENSION}`
+	large_images = `find *-lg.#{OUTPUT_FILE_EXTENSION} -maxdepth 1`
 	large_images.split("\n").each do |image|
 		jpeg_info = `identify #{image}`
 		jpeg_info_array = jpeg_info.split(" ")
