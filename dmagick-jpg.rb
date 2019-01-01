@@ -10,7 +10,7 @@ end
 require_relative './dmagick-constants.rb'
 
 SOURCE_DIRECTORY_NAME = ARGV[0]
-JPEG_QUALITY = '60%'
+JPEG_QUALITY = '80%'
 OUTPUT_FILE_EXTENSION = 'jpg'
 
 
