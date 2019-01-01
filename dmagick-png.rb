@@ -35,7 +35,7 @@ end
 def generate_image_sizes()
 	Kernel.system "mkdir -p #{DESTINATION_DIRECTORY_NAME}"
 	SIZES.each do |size|
-		imagemagick_command = "find . -type f  \\( -name '*.tif' -o -name '*.png' \\) | xargs -I@  #{IMAGEMAGICK_COMMAND} @ -resize #{size[:max_width]} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.#{OUTPUT_FILE_EXTENSION}'"
+		imagemagick_command = "find . -maxdepth 1 -type f  \\( -name '*.tif' -o -name '*.png' \\) | xargs -I@  #{IMAGEMAGICK_COMMAND} @ -resize #{size[:max_width]} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-#{size[:name]}.#{OUTPUT_FILE_EXTENSION}'"
 		puts imagemagick_command
 		Kernel.system imagemagick_command
 	end
