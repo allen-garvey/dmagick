@@ -15,7 +15,7 @@ THUMBNAIL_SIZE = '200'
 Dir.chdir(SOURCE_DIRECTORY_NAME) do
 	Kernel.system "mkdir -p #{DESTINATION_DIRECTORY_NAME}"
 	#resize images first, to make seam carving faster
-	resize_images_command = "find . -maxdepth 1 -type f  \\( -name '*.tif' -o -name '*.png' \\) | convert *.png -resize #{THUMBNAIL_SIZE} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-thumb.png'"
+	resize_images_command = "find . -maxdepth 1 -type f  \\( -name '*.tif' -o -name '*.png' \\) | xargs -I@ convert @ -resize #{THUMBNAIL_SIZE} -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name]-thumb.png'"
 	puts resize_images_command
 	Kernel.system resize_images_command
 
