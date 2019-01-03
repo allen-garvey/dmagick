@@ -7,14 +7,14 @@ if ARGV.size != 1
 	abort("Requires source directory name as first argument")
 end
 
-require_relative './constants.rb'
-require_relative './resize-constants.rb'
+require_relative './includes/constants.rb'
+require_relative './includes/resize-constants.rb'
 
 SOURCE_DIRECTORY_NAME = ARGV[0]
 JPEG_QUALITY = '80%'
 OUTPUT_FILE_EXTENSION = 'jpg'
 
-require_relative './move-large-portraits-to-unused.rb'
+require_relative './includes/move-large-portraits-to-unused.rb'
 
 ### automatically generate different size images
 def generate_image_sizes()

@@ -4,7 +4,7 @@ if ARGV.size != 1
 	abort("Requires source directory name as first argument")
 end
 
-require_relative './constants.rb'
+require_relative './includes/constants.rb'
 
 SOURCE_DIRECTORY_NAME = ARGV[0]
 DESTINATION_DIRECTORY_ROOT = ARGV.size > 1 ? ARGV[1] : SOURCE_DIRECTORY_NAME
