@@ -5,6 +5,7 @@ A wrapper around ImageMagick to batch resize a directory of jpg files into multi
 ## Dependencies
 
 * ImageMagick
+* Ruby >= 2.5
 
 ## Getting Started
 
