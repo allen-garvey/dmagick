@@ -7,7 +7,7 @@ if ARGV.size != 1
 	abort("Requires source directory name as first argument")
 end
 
-require_relative './dmagick-constants.rb'
+require_relative './resize-constants.rb'
 
 SOURCE_DIRECTORY_NAME = ARGV[0]
 OUTPUT_FILE_EXTENSION = 'png'
