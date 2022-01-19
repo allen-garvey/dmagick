@@ -16,7 +16,7 @@ OUTPUT_FILE_EXTENSION = 'webp'
 def generate_image_sizes()
 	Kernel.system "mkdir -p #{DESTINATION_DIRECTORY_NAME}"
 	
-	imagemagick_command = "find . -maxdepth 1 -type f  \\( -name '*.tif' -o -name '*.png' \\) | xargs -I@  #{IMAGEMAGICK_COMMAND} @ -quality #{WEBP_QUALITY} -define webp:lossless=true -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name].#{OUTPUT_FILE_EXTENSION}'"
+	imagemagick_command = "find . -maxdepth 1 -type f  \\( -name '*.tif' -o -name '*.png' \\) | xargs -P 4 -I@  #{IMAGEMAGICK_COMMAND} @ -quality #{WEBP_QUALITY} -define webp:lossless=true -set filename:name '%t' '#{DESTINATION_DIRECTORY_NAME}/%[filename:name].#{OUTPUT_FILE_EXTENSION}'"
 	
 	puts imagemagick_command
 	Kernel.system imagemagick_command
